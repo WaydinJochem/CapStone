@@ -6,6 +6,6 @@ const connection = createPool({
     user: process.env.dbUser,
     password: process.env.dbPwd,
     multipleStatements: true,
-    connectionLimit: 30
+    connectionLimit: 300000000
 });
 module.exports = connection;
