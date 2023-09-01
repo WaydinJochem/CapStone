@@ -34,12 +34,20 @@ class Products {
     //Add products
     addProduct(req, res) {
 
+        if (!data.prodID) {
+            return res.json({
+                status: res.statusCode,
+                msg: "No prodID inserted"
+            })
+        };
+        
         const query = `
             INSERT INTO Products
             SET ? ;
         `
-        db.query(query,[req.body], (err)=>{
-            if(err) throw err
+
+        db.query(query, [req.body], (err) => {
+            if (err) throw err
             res.json({
                 status: res.statusCode,
                 msg: "Product has been successfully added"
@@ -53,8 +61,8 @@ class Products {
         SET ?
         WHERE prodID = ?;
         `
-        db.query(query,  [req.body, req.params.id], (err)=>{
-            if(err) throw err
+        db.query(query, [req.body, req.params.id], (err) => {
+            if (err) throw err
             res.json({
                 status: res.statusCode,
                 msg: "Product has been successfully updated"
@@ -67,8 +75,8 @@ class Products {
         DELETE FROM Products
         WHERE prodID = ${req.params.id};
         `
-        db.query(query, (err)=>{
-            if(err)throw err
+        db.query(query, (err) => {
+            if (err) throw err
             res.json({
                 status: res.statusCode,
                 msg: "A product has been successfully deleted"

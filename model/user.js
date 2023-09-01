@@ -1,6 +1,6 @@
 const db = require("../config/config");
 const { hash, compare, hashSync } = require('bcrypt');
-const { createToken } =
+const { createToken, verifyToken } =
     require('../middleware/AuthenticateUser');
 class Users {
     fetchUsers(req, res) {
@@ -59,6 +59,15 @@ class Users {
                                 emailAdd,
                                 userPwd
                             })
+                         console.log("Token generated", token);
+                        // Verify the token
+                        const decodedToken = verifyToken(token);
+
+                        if (decodedToken) {
+                            console.log('Decoded Token:', decodedToken);
+                        } else {
+                            console.error('Token verification failed');
+                        }
                         // // Save a token
                         res.cookie("LegitUser",
                             token, {
@@ -79,6 +88,7 @@ class Users {
                             })
                         }
                     })
+
             }
         })
     }
@@ -112,7 +122,7 @@ class Users {
                 let token = createToken(user)
                 res.cookie("LegitUser", token,
                     {
-                        maxAge: 3600000,
+                        maxAge: 3,
                         httpOnly: true
                     })
                 res.json({
@@ -124,6 +134,7 @@ class Users {
     updateUser(req, res) {
         const data = req.body;
         if (data.userPwd) {
+            console.log(data.userPwd);
             data.userPwd = hashSync(data.userPwd, 15)
         }
 
@@ -133,7 +144,7 @@ class Users {
         WHERE userID = ?
         `
         db.query(query,
-            [req.body, req.params.id],
+            [data, req.params.id],
             (err) => {
                 if (err) throw err
                 res.json({
