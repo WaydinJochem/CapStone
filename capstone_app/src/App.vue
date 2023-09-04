@@ -1,5 +1,8 @@
 <template>
-
+  <router-view />
+ <!-- <div>
+    <h1>This is the intro section, look at the figma design to settle on a landing</h1>
+  </div>  -->
 </template>
 
 <style>
