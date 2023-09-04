@@ -33,6 +33,7 @@ class Products {
     }
     //Add products
     addProduct(req, res) {
+        const data = req.body;
 
         if (!data.prodID) {
             return res.json({
@@ -46,7 +47,7 @@ class Products {
             SET ? ;
         `
 
-        db.query(query, [req.body], (err) => {
+        db.query(query, data, (err) => {
             if (err) throw err
             res.json({
                 status: res.statusCode,
