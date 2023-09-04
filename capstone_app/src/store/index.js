@@ -5,7 +5,7 @@ export default createStore({
     products: null,
   },
   mutations: {
-    setProducts: (state, value) =>{
+    setProducts: (state, value) => {
       state.products = value;
     }
   },
@@ -13,12 +13,12 @@ export default createStore({
     async fetchProducts(context) {
       try {
         let { products } = await (
-          await fetch('https://capstone-88ut.onrender.com/items')
+          await fetch("https://capstone-88ut.onrender.com/items")
         ).json();
         if (products) {
-          context.commit('setProducts', products);
+          context.commit("setProducts", products);
         }
-        else{
+        else {
           alert('An error seems to have ocurred while trying to fetch products')
         }
       }

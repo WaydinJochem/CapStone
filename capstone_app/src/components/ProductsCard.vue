@@ -1,8 +1,8 @@
 <template>
     <div v-if="products" >
-        <div v-for="product in products " :key="product.id" :products="product">
+        <div v-for="products in products " :key="products.id" :products="products">
         <div>
-            <img :src="product.prodUrl" alt="">
+            <img :src="products.prodUrl" alt="">
         </div>
         </div>
     </div>
@@ -18,7 +18,7 @@ export default {
         }
     }, 
     mounted() {
-        this.$store.dispatch('fetchProducts');
+        this.$store.dispatch("fetchProducts");
     },
 }
 </script>
