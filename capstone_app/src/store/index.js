@@ -2,29 +2,47 @@ import { createStore } from 'vuex';
 
 export default createStore({
   state: {
-    products: null,
+    items: null,
+    item: null,
   },
   mutations: {
-    setProducts: (state, value) => {
-      state.products = value;
+    setItems: (state, products) => {
+      state.items = products;
+    },
+    setItem: (state, product) => {
+      state.item = product;
     }
   },
   actions: {
-    async fetchProducts(context) {
+    async fetchItems(context) {
       try {
-        let { products } = await (
-          await fetch("https://capstone-88ut.onrender.com/items")
-        ).json();
-        if (products) {
-          context.commit("setProducts", products);
+        let response = await fetch(`https://capstone-88ut.onrender.com/items`);
+        let { results } = await response.json();
+        if (results) {
+          context.commit("setItems", results);
         }
         else {
           alert('An error seems to have ocurred while trying to fetch products')
         }
       }
-      catch (e) {
-        console.error(error);
+      catch (err) {
+        console.error(err);
       }
     }, //end of products json
+    async fetchItem(context, id) {
+      try {
+        let response = await fetch(`https://capstone-88ut.onrender.com/items/` + id);
+        let { results } = await response.json();
+        if (results) {
+          context.commit("setItem", results);
+        }
+        else {
+          alert('Unable to retrieve product ID')
+        }
+      }
+      catch (err) {
+        console.error(err);
+      }
+    }, //end of get single product json
   },
 })

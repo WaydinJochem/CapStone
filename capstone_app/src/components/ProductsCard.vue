@@ -1,27 +1,17 @@
 <template>
-    <div v-if="products" >
-        <div v-for="products in products " :key="products.id" :products="products">
+    <router-link :to="{ name:'Item', params: { id: item.prodID } }">
         <div>
-            <img :src="products.prodUrl" alt="">
+            <p>
+                {{ item.prodName }}
+            </p>
+            <img :src="item.prodUrl" alt="postimages offline">
         </div>
-        </div>
-    </div>
-    <div v-else>
-        	<p>Content still fetching</p>
-    </div>
+    </router-link>
 </template>
 <script>
+
 export default {
-    computed: {
-        products() {
-            return this.$store.state.products
-        }
-    }, 
-    mounted() {
-        this.$store.dispatch("fetchProducts");
-    },
+  props: ['item'],
 }
 </script>
-<style>
-    
-</style>
+<style></style>
