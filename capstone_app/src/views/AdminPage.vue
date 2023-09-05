@@ -1,11 +1,15 @@
 <template>
-    <div>
-        <h1>This is the Admin Page</h1>
-    </div>
+    <main>
+    <ProductTable/>
+    </main>
 </template>
 <script>
+import ProductTable from '@/components/AdminProducts.vue';
 export default {
     
+    components: {
+        ProductTable
+    }
 }
 </script>
 <style>

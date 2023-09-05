@@ -1,4 +1,6 @@
 import { createStore } from 'vuex';
+const render = 'https://capstone-88ut.onrender.com/';
+import axios from 'axios';
 
 export default createStore({
   state: {
@@ -16,8 +18,8 @@ export default createStore({
   actions: {
     async fetchItems(context) {
       try {
-        let response = await fetch(`https://capstone-88ut.onrender.com/items`);
-        let { results } = await response.json();
+        const response = await fetch(`${render}items`);
+        const { results } = await response.json();
         if (results) {
           context.commit("setItems", results);
         }
@@ -31,8 +33,8 @@ export default createStore({
     }, //end of products json
     async fetchItem(context, id) {
       try {
-        let response = await fetch(`https://capstone-88ut.onrender.com/items/` + id);
-        let { results } = await response.json();
+        const response = await fetch(`${render}items/` + id);
+        const { results } = await response.json();
         if (results) {
           context.commit("setItem", results);
         }
@@ -44,5 +46,19 @@ export default createStore({
         console.error(err);
       }
     }, //end of get single product json
+    async AddItem(context, model) {
+      try {
+        const response = await axios.post(`${render}/items`, model)
+        if (response) {
+          context.commit("setItems", results);
+        }
+        else {
+          alert('Post was unsuccessful')
+        }
+      }
+      catch (err) {
+        console.error(err);
+      }
+    }//post 
   },
 })
