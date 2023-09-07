@@ -23,40 +23,69 @@
                 </td>
             </tr>
         </table>
-        <div class="modal" v-if="modalVisible" @click="closeModal()">
+        <div class="modal" v-if="modalVisible">
             <div class="modal-content">
                 <!-- Modal content goes here -->
                 <span class="close" @click="closeModal">&times;</span>
-                <p>This is the modal content.</p>
+                <!-- Start of modal content -->
+                <Add :newItem="newItem">
+                    <button @click="newProd()" class="add-product-btn">Add Product</button>
+                </Add>
+                <!-- End of modal content -->
             </div>
         </div>
     </div>
     <div v-else>printing products</div>
 </template>
 <script>
+import Add from './Modal Content.vue';
 export default {
+    components: {
+        Add
+    },
     computed: {
         items() {
             return this.$store.state.items;
-        },
-        
+        }
     },
+
     mounted() {
         this.$store.dispatch("fetchItems");
     },
     data() {
         return {
             modalVisible: false,
-        };
+            newItem: {
+                prodID: 0,
+                prodName: "",
+                quantity: 0,
+                amount: 0,
+                Category: "",
+                prodUrl: ""
+            },
+        }
     },
     methods: {
         openModal() {
             this.modalVisible = true;
         },
         closeModal() {
-            this.modalVisible = false;
+            this.modalVisible = false
         },
+        async newProd() {
+            const success = await this.$store.dispatch("AddItem", this.newItem);
+            if (success) {
+                this.closeModal();
+            }
+            else {
+                alert("Item failed to add")
+            }
+        },
+
     },
+    created() {
+        this.$store.dispatch("fetchItems")
+    }
 }
 </script>
 <style scoped>
@@ -110,11 +139,11 @@ button {
 .modal-content {
     border-radius: 20px;
     background-color: #fefefe;
-    margin: 3% auto;
+    margin: 15% auto;
     padding: 10px;
     border: 1px solid #888;
     width: 60%;
-    height: 40%;
+    /* height: 40%; */
 }
 
 

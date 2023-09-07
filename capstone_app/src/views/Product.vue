@@ -17,7 +17,7 @@ export default {
     mounted() {
         this.$store.dispatch('fetchItem', this.id)
         // console.log(this.mounted)
-    },
+    }
 }
 </script>
 <style></style>

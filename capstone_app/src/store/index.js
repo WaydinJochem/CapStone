@@ -13,7 +13,11 @@ export default createStore({
     },
     setItem: (state, product) => {
       state.item = product;
-    }
+    },
+    addItem: (state, newItem) => {
+      state.items.push(newItem)
+    },
+
   },
   actions: {
     async fetchItems(context) {
@@ -46,11 +50,12 @@ export default createStore({
         console.error(err);
       }
     }, //end of get single product json
-    async AddItem(context, model) {
+    async AddItem(context, newItem) {
       try {
-        const response = await axios.post(`${render}/items`, model)
+        const response = await axios.post(`${render}items`, newItem)
         if (response) {
-          context.commit("setItems", results);
+          context.dispatch("fetchItems")
+          context.commit("setItems", response.data);
         }
         else {
           alert('Post was unsuccessful')
