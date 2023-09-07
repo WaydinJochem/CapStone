@@ -2,6 +2,7 @@
     <div v-if="items">
         <table>
             <tr>
+
                 <th>Product ID</th>
                 <th>Product Name</th>
                 <th>Quantity</th>
@@ -19,7 +20,8 @@
                 <td>{{ product.prodUrl }}</td>
                 <td>
                     <button @click="openModal()">Add</button>
-                    <button>Delete</button>
+                    <button @click="removeProd(product.prodID)">Delete</button>
+                    <button @click="editModal(product.prodID)">Edit</button>
                 </td>
             </tr>
         </table>
@@ -28,9 +30,16 @@
                 <!-- Modal content goes here -->
                 <span class="close" @click="closeModal">&times;</span>
                 <!-- Start of modal content -->
-                <Add :newItem="newItem">
-                    <button @click="newProd()" class="add-product-btn">Add Product</button>
-                </Add>
+                <div v-if="modalContentType === 'add'">
+                    <Add :newItem="newItem">
+                        <button @click="newProd()">Add Product</button>
+                    </Add>
+                </div>
+                <div v-if="modalContentType === 'edit'">
+                    <Edit :update="selectedItem">
+                        <button @click="updateProduct()">Edit Product</button>
+                    </Edit>
+                </div>
                 <!-- End of modal content -->
             </div>
         </div>
@@ -38,15 +47,17 @@
     <div v-else>printing products</div>
 </template>
 <script>
-import Add from './Modal Content.vue';
+import Add from './AddProductModal.vue';
+import Edit from './EditProductModal.vue';
 export default {
     components: {
-        Add
+        Add,
+        Edit
     },
     computed: {
         items() {
             return this.$store.state.items;
-        }
+        },
     },
 
     mounted() {
@@ -55,6 +66,12 @@ export default {
     data() {
         return {
             modalVisible: false,
+            modalContentType: null,
+            // update: {
+            //     ...this.newItem
+            // },
+            selectedItem: null,
+            // updateID: null,
             newItem: {
                 prodID: 0,
                 prodName: "",
@@ -67,13 +84,26 @@ export default {
     },
     methods: {
         openModal() {
+            this.modalContentType = 'add';
             this.modalVisible = true;
         },
         closeModal() {
             this.modalVisible = false
         },
-        async newProd() {
-            const success = await this.$store.dispatch("AddItem", this.newItem);
+        async editModal(prodID) {
+            await this.$store.dispatch("fetchItems")
+            this.selectedItem = {
+                ...this.$store.state.items.find(
+                    (product) => product.prodID === prodID
+                ),
+            };
+            this.modalContentType = 'edit';
+            this.modalVisible = true;
+        },
+        newProd() {
+            this.modalContentType = 'add';
+            this.modalVisible = true;
+            const success = this.$store.dispatch("AddItem", this.newItem);
             if (success) {
                 this.closeModal();
             }
@@ -81,12 +111,27 @@ export default {
                 alert("Item failed to add")
             }
         },
-
+        removeProd(prodID) {
+            const success = this.$store.dispatch("RemoveItem", prodID);
+            if (success) {
+                this.closeModal();
+            }
+            else {
+                alert("Failed to delete")
+            }
+        },
+        updateProduct() {
+            const success = this.$store.dispatch("Edit", this.selectedItem)
+            if (success) {
+                this.closeModal();
+            }
+            else {
+                alert("error")
+            }
+        },
     },
-    created() {
-        this.$store.dispatch("fetchItems")
-    }
 }
+
 </script>
 <style scoped>
 div {

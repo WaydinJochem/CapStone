@@ -1,6 +1,8 @@
 import { createStore } from 'vuex';
 const render = 'https://capstone-88ut.onrender.com/';
 import axios from 'axios';
+// import { assertLiteral } from '@babel/types';
+// import { container } from 'webpack';
 
 export default createStore({
   state: {
@@ -64,6 +66,36 @@ export default createStore({
       catch (err) {
         console.error(err);
       }
-    }//post 
+    },//post 
+    async RemoveItem(context, prodID) {
+      try {
+        const response = await axios.delete(`${render}items/${prodID}`)
+        if (response) {
+          context.dispatch("fetchItems")
+          context.commit("setItem", response.data)
+        }
+        else {
+          alert("delete was unsuccessful")
+        }
+      }
+      catch (err) {
+        console.error(err);
+      }
+    },//delete
+    async Edit(context, updatedItem) {
+      try {
+        const response = await axios.patch(`${render}items/${updatedItem.prodID}`, updatedItem)
+        if (response) {
+          context.dispatch("fetchItems")
+          context.commit("setItem", response.data)
+        }
+        else {
+          alert("update unsuccessful")
+        }
+      }
+      catch (err) {
+        console.error(err)
+      }
+    }//patch
   },
 })
