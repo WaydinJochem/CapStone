@@ -69,11 +69,11 @@ class Users {
                             console.error('Token verification failed');
                         }
                         // // Save a token
-                        res.cookie("LegitUser",
-                            token, {
-                            maxAge: 3600000,
-                            httpOnly: true
-                        })
+                        // res.cookie("LegitUser",
+                        //     token, {
+                        //     maxAge: 3600000,
+                        //     httpOnly: true
+                        // })
                         if (cResult) {
                             res.json({
                                 msg: "Logged in",
@@ -122,7 +122,7 @@ class Users {
                 let token = createToken(user)
                 res.cookie("LegitUser", token,
                     {
-                        maxAge: 3,
+                        // maxAge: 3,
                         httpOnly: true
                     })
                 res.json({
