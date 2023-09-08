@@ -107,10 +107,54 @@ export default createStore({
       catch (err) {
         console.error(err)
       }
-    }//patch
+    },//patch
 
     //  Users actions start
-
+    async fetchUsers(context) {
+      try {
+        const response = await fetch(`${render}users`);
+        const { results } = await response.json();
+        if (results) {
+          context.commit("setUsers", results);
+        }
+        else {
+          alert('An error seems to have ocurred while trying to fetch users')
+        }
+      }
+      catch (err) {
+        console.error(err);
+      }
+    },//fetch all users
+    async fetchUser(context, id) {
+      try {
+        const response = await fetch(`${render}users/` + id);
+        const { results } = await response.json();
+        if (results) {
+          context.commit("setUser", results);
+        }
+        else {
+          alert('Unable to retrieve user ID')
+        }
+      }
+      catch (err) {
+        console.error(err);
+      }
+    },
+    async updateUser(context, updatedItem) {
+      try {
+        const response = await axios.patch(`${render}users/${updatedItem.userID}`, updatedItem)
+        if (response) {
+          context.dispatch("fetchUsers")
+          context.commit("setUser", response.data)
+        }
+        else {
+          alert("update unsuccessful")
+        }
+      }
+      catch (err) {
+        console.error(err)
+      }
+    },
     // Users actions end
   },
 })
