@@ -8,6 +8,8 @@ export default createStore({
   state: {
     items: null,
     item: null,
+    users: null,
+    user: null,
   },
   mutations: {
     setItems: (state, products) => {
@@ -16,9 +18,18 @@ export default createStore({
     setItem: (state, product) => {
       state.item = product;
     },
-    addItem: (state, newItem) => {
-      state.items.push(newItem)
+    // addItem: (state, newItem) => {
+    //   state.items.push(newItem)
+    // },
+
+    // Users mutations start
+    setUsers: (state, users) => {
+      state.users = users;
     },
+    setUser: (state, user) => {
+      state.user = user;
+    }
+    // users mutations end
 
   },
   actions: {
@@ -97,5 +108,9 @@ export default createStore({
         console.error(err)
       }
     }//patch
+
+    //  Users actions start
+
+    // Users actions end
   },
 })
