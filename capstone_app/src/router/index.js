@@ -31,7 +31,8 @@ const routes = [
     name: 'Item',
     component: () => import('../views/Product.vue'),
     props: true
-  },
+  }
+
 ]
 
 const router = createRouter({

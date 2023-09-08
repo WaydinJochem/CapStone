@@ -1,18 +1,15 @@
 <template>
   <main>
-    <Nav />
-    <router-view />
+    <Nav/>
+    <router-view/>
   </main>
-  <!-- <div>
-    <h1>This is the intro section, look at the figma design to settle on a landing</h1>
-  </div>  -->
 </template>
 
 <script>
 import Nav from './components/NavComp.vue';
 export default {
   components: {
-    Nav
+    Nav,
   }
 }
 </script>
