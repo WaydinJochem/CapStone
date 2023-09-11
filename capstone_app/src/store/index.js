@@ -1,15 +1,17 @@
 import { createStore } from 'vuex';
 const render = 'https://capstone-88ut.onrender.com/';
 import axios from 'axios';
+import VueCookies from 'vue-cookies';
 // import { assertLiteral } from '@babel/types';
 // import { container } from 'webpack';
-
+VueCookies.config('10s')
 export default createStore({
   state: {
     items: null,
     item: null,
     users: null,
     user: null,
+    userToken: VueCookies.get('userToken') || null,
   },
   mutations: {
     setItems: (state, products) => {
@@ -28,7 +30,11 @@ export default createStore({
     },
     setUser: (state, user) => {
       state.user = user;
-    }
+    },
+    setToken: (state, token) =>{
+      state.userToken = token;
+      VueCookies.set('userToken', token, '30s')
+    },
     // users mutations end
 
   },

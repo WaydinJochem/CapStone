@@ -14,31 +14,31 @@
                 </div>
                 <div class="input-details-row">
                     <label for="">lastName</label>
-                    <input type="text" class="info-input" v-model="newUser.lastName"/>
+                    <input type="text" class="info-input" v-model="newUser.lastName" />
                 </div>
                 <div class="input-details-row">
                     <label for="">Age</label>
-                    <input type="number" class="info-input" v-model="newUser.userAge"/>
+                    <input type="number" class="info-input" v-model="newUser.userAge" />
                 </div>
                 <div class="input-details-row">
                     <label for="">Gender</label>
-                    <input type="text" class="info-input" v-model="newUser.Gender"/>
+                    <input type="text" class="info-input" v-model="newUser.Gender" />
                 </div>
                 <div class="input-details-row">
                     <label for="">Role</label>
-                    <input type="text" class="info-input" v-model="newUser.userRole"/>
+                    <input type="text" class="info-input" v-model="newUser.userRole" />
                 </div>
                 <div class="input-details-row">
                     <label for="">Email</label>
-                    <input type="email" class="info-input" v-model="newUser.emailAdd"/>
+                    <input type="email" class="info-input" v-model="newUser.emailAdd" />
                 </div>
                 <div class="input-details-row">
                     <label for="">Password</label>
-                    <input type="password" class="info-input" v-model="newUser.userPwd"/>
+                    <input type="password" class="info-input" v-model="newUser.userPwd" />
                 </div>
                 <div class="input-details-row">
                     <label for="">Img</label>
-                    <input type="text" class="info-input" v-model="newUser.userURL"/>
+                    <input type="text" class="info-input" v-model="newUser.userURL" />
                 </div>
             </div>
 
@@ -69,6 +69,7 @@ export default {
             const success = this.$store.dispatch("Register", this.newUser);
             if (success) {
                 alert("Success")
+                this.$router.push("/login")
             }
             else {
                 alert("Unable to add user")
