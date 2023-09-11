@@ -118,13 +118,6 @@ class Users {
             [data],
             (err) => {
                 if (err) throw err
-                // Create token
-                let token = createToken(user)
-                res.cookie("LegitUser", token,
-                    {
-                        // maxAge: 3,
-                        httpOnly: true
-                    })
                 res.json({
                     status: res.statusCode,
                     msg: "You are now registered."
