@@ -4,20 +4,12 @@
         <router-link to="/about">About</router-link> |
         <router-link to="/products">Products</router-link> |
         <router-link to="/admin">Admin Page</router-link> |
-        <button @click="openModal()">Register
-        </button>
-        <div class="modal" v-if="modalVisible">
-            <register :modalVisible="modalVisible" />
-            <!-- End of modal content -->
-        </div>
+        <router-link to="/register">Register</router-link>
     </div>
 </template>
 <script>
-import Register from './Register.vue';
+
 export default {
-    components: {
-        Register
-    },
     data() {
         return {
             modalVisible: false,

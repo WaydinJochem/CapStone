@@ -2,7 +2,6 @@
     <div v-if="items">
         <table>
             <tr>
-
                 <th>Product ID</th>
                 <th>Product Name</th>
                 <th>Quantity</th>

@@ -1,17 +1,17 @@
 <template>
     <main>
     <ProductTable/>
-    <UserTable/>
+    <UsersTable/> 
     </main>
 </template>
 <script>
 import ProductTable from '@/components/AdminProducts.vue';
-import UserTable from '@/components/AdminUser.vue';
+import UsersTable from '@/components/UsersAdmin.vue';
 export default {
     
     components: {
         ProductTable,
-        UserTable
+        UsersTable
     }
 }
 </script>
