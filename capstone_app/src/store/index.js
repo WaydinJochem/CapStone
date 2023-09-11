@@ -140,6 +140,41 @@ export default createStore({
         console.error(err);
       }
     },
+    // Add newUsers
+    async Register(context, newUser) {
+      try {
+        const response = await axios.post(`${render}register`, newUser)
+        if (response) {
+          context.dispatch("fetchUsers")
+          context.commit("setUsers", response.data);
+        }
+        else {
+          alert('Post was unsuccessful')
+        }
+      }
+      catch (err) {
+        console.error(err);
+      }
+    },
+
+    //Delete Users
+    async RemoveUser(context, userID) {
+      try {
+        const response = await axios.delete(`${render}users/${userID}`)
+        if (response) {
+          context.dispatch("fetchUsers")
+          context.commit("setUser", response.data)
+        }
+        else {
+          alert("delete was unsuccessful")
+        }
+      }
+      catch (err) {
+        console.error(err);
+      }
+    },
+
+    // Update Users
     async updateUser(context, updatedItem) {
       try {
         const response = await axios.patch(`${render}users/${updatedItem.userID}`, updatedItem)
@@ -156,5 +191,9 @@ export default createStore({
       }
     },
     // Users actions end
+
+
+    //Login creating cookie
+    // async Login(context, )
   },
 })

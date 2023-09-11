@@ -94,7 +94,7 @@ export default {
             this.selectedItem = {
                 ...this.$store.state.items.find(
                     (product) => product.prodID === prodID
-                ),
+                ),  
             };
             this.modalContentType = 'edit';
             this.modalVisible = true;
