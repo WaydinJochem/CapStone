@@ -54,26 +54,26 @@ class Users {
                     (cErr, cResult) => {
                         if (cErr) throw cErr
                         // Create a token
-                        const token =
-                            createToken({
-                                emailAdd,
-                                userPwd
-                            })
-                         console.log("Token generated", token);
-                        // Verify the token
-                        const decodedToken = verifyToken(token);
+                        // const token =
+                        //     createToken({
+                        //         emailAdd,
+                        //         userPwd
+                        //     })
+                        //  console.log("Token generated", token);
+                        // // Verify the token
+                        // const decodedToken = verifyToken(token);
 
-                        if (decodedToken) {
-                            console.log('Decoded Token:', decodedToken);
-                        } else {
-                            console.error('Token verification failed');
-                        }
-                        // // Save a token
-                        // res.cookie("LegitUser",
-                        //     token, {
-                        //     maxAge: 3600000,
-                        //     httpOnly: true
-                        // })
+                        // if (decodedToken) {
+                        //     console.log('Decoded Token:', decodedToken);
+                        // } else {
+                        //     console.error('Token verification failed');
+                        // }
+                        // // // Save a token
+                        // // res.cookie("LegitUser",
+                        // //     token, {
+                        // //     maxAge: 3600000,
+                        // //     httpOnly: true
+                        // // })
                         if (cResult) {
                             res.json({
                                 msg: "Logged in",
