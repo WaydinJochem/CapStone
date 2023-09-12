@@ -4,13 +4,14 @@ import axios from 'axios';
 import VueCookies from 'vue-cookies';
 // import { assertLiteral } from '@babel/types';
 // import { container } from 'webpack';
-VueCookies.config('10s')
+VueCookies.config('1h')
 export default createStore({
   state: {
     items: null,
     item: null,
     users: null,
     user: null,
+    userData: VueCookies.get('userData') || null,
     userToken: VueCookies.get('userToken') || null,
   },
   mutations: {
@@ -31,14 +32,100 @@ export default createStore({
     setUser: (state, user) => {
       state.user = user;
     },
-    setToken: (state, token) =>{
+    setToken: (state, token) => {
       state.userToken = token;
-      VueCookies.set('userToken', token, '30s')
+      VueCookies.set('userToken', token, '1h')
+    },
+    setUserData(state, userData) {
+      state.userData = userData;
+      VueCookies.set('userData', JSON.stringify(userData), '1h');
+    },
+    clearUserData(state) {
+      state.userData = null;
+      VueCookies.remove('userData');
     },
     // users mutations end
 
   },
   actions: {
+    // async Register({ commit }, newUser) {
+    //   try {
+    //     const response = await axios.post(`${render}register`, newUser);
+
+    //     if (response.data && response.data.token) {
+    //       const token = response.data.token;
+
+    //       // Set the user token using the mutation
+    //       commit('setToken', token);
+    //     } else {
+    //       alert('Registration failed. Please check your input.');
+    //     }
+    //   } catch (err) {
+    //     console.error(err);
+    //   }
+    // },
+    // async register({ commit, dispatch }, newUser) {
+    //   try {
+    //     const response = await axios.post(`${render}register`, newUser);
+
+    //     if (response.status === 200) {
+    //       // Registration successful, you can choose to automatically log in the user here
+    //       // You can also redirect to the login page or perform other actions
+    //       alert('Registration successful');
+    //       dispatch('redirect', '/login'); // Redirect to the login page
+    //     } else {
+    //       alert('Registration failed. Please check your input.');
+    //     }
+    //   } catch (err) {
+    //     console.error(err);
+    //     alert('An error occurred during registration.');
+    //   }
+    // },
+
+    // redirect(context, path) {
+    //   this.$router.push(path); // Replace `this.$router` with your router instance
+    // },
+
+    // async login({ commit }, { email, password }) {
+    //   try {
+    //     const response = await axios.post(`${render}login`, { email, password });
+
+    //     if (response.data && response.data.token) {
+    //       const token = response.data.token;
+    //       const userData = response.data.userData;
+
+    //       commit('setToken', token);
+    //       commit('setUserData', userData);
+
+    //       // Redirect to the dashboard or another page after successful login
+    //     } else {
+    //       alert('Login failed. Please check your credentials.');
+    //     }
+    //   } catch (err) {
+    //     console.error(err);
+    //     alert('An error occurred during login.');
+    //   }
+    // },
+    
+    // async register({ commit }, newUser) {
+    //   try {
+    //     const response = await axios.post(`${render}register`, newUser);
+
+    //     if (response.status === 200) {
+    //       // Registration successful, you can choose to automatically log in the user here
+    //       // You can also redirect to the login page or perform other actions
+    //       alert('Registration successful');
+    //     } else {
+    //       alert('Registration failed. Please check your input.');
+    //     }
+    //   } catch (err) {
+      //     console.error(err);
+    //     alert('An error occurred during registration.');
+    //   }
+    // },
+
+
+
     async fetchItems(context) {
       try {
         const response = await fetch(`${render}items`);
@@ -151,7 +238,6 @@ export default createStore({
       try {
         const response = await axios.post(`${render}register`, newUser)
         if (response) {
-          context.dispatch("fetchUsers")
           context.commit("setUsers", response.data);
         }
         else {
@@ -160,8 +246,34 @@ export default createStore({
       }
       catch (err) {
         console.error(err);
+      } 
+    },
+    async login({ commit }, { email, password }) {
+      try {
+        const response = await axios.post(`${render}login`, { emailAdd: email, userPwd: password });
+
+        if (response.data.token) {
+          const token = response.data.token;
+          const userData = response.data.result;
+
+          commit('setToken', token);
+          commit('setUserData', userData);
+
+          // Redirect to the dashboard or another page after successful login
+        } else {
+          alert('Login failed. Please check your credentials.');
+        }
+      } catch (err) {
+        console.error(err);
+        alert('An error occurred during login.');
       }
     },
+    
+    
+
+
+
+
 
     //Delete Users
     async RemoveUser(context, userID) {
