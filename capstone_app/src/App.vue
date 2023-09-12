@@ -1,7 +1,7 @@
 <template>
   <main>
-    <Nav/>
-    <router-view/>
+    <Nav />
+    <router-view />
   </main>
 </template>
 
@@ -15,24 +15,35 @@ export default {
 </script>
 
 <style>
+body {
+  margin: 0;
+  background: linear-gradient(35deg,#000b1e , #002B79 45%, #000B1E);
+  background-attachment: fixed;
+  background-repeat:no-repeat ;
+}
+
 #app {
+
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  cursor:default;
+  margin-top:10%;
 }
 
-/* nav {
-  padding: 30px;
+/* router-view {
+  height: 100%;
 } */
+
 
 nav a {
   font-weight: bold;
   color: #2c3e50;
 }
 
-nav a.router-link-exact-active {
+nav router-link-exact-active {
   color: #42b983;
 }
 </style>

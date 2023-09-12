@@ -34,8 +34,8 @@ export default {
     //     alert('Login failed. Please check your credentials.');
     //   }  
     // },
-    async loginUser() {
-      const success = await this.$store.dispatch('login', {
+    loginUser() {
+      const success = this.$store.dispatch('login', {
         email: this.email,
         password: this.password,
       });
