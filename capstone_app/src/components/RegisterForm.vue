@@ -6,7 +6,7 @@
             <input type="text" class="info-input" v-model="newUser.firstName" />
         </div>
         <div class="Category">
-            <label for="">lastName</label>
+            <label for="">LastName</label>
             <input type="text" class="info-input" v-model="newUser.lastName" />
         </div>
         <div class="Category">
@@ -23,20 +23,23 @@
         </div>
         <div class="Category">
             <label for="">Email</label>
-            <input type="email" class="info-input" v-model="newUser.emailAdd" />
+            <input type="email" class="info-input" v-model="newUser.emailAdd" placeholder="example@gmail.com" />
         </div>
         <div class="Category">
             <label for="">Password</label>
-            <input type="password" class="info-input" v-model="newUser.userPwd" />
+            <div>
+                <input type="password" class="info-input" v-model="newUser.userPwd" id="password"/><span style="font-size: x-large;" @click="checkPass()">&#128065;</span>
+            </div>
         </div>
         <div class="Category">
             <label for="">Img</label>
             <input type="text" class="info-input" v-model="newUser.userURL" />
         </div>
         <div class="Category">
-            <input type="hidden" class="info-input" v-model="newUser.userID" placeholder="Will be provided upon successful sign up"/>
+            <input type="hidden" class="info-input" v-model="newUser.userID"
+                placeholder="Will be provided upon successful sign up" />
         </div>
-        
+
     </form>
 
     <!-- Register Content End -->
@@ -45,6 +48,17 @@
 export default {
     props: {
         newUser: Object
+    },
+    methods: {
+        checkPass() {
+            const input = document.getElementById("password");
+
+            if (input.getAttribute("type") === "password") {
+                input.setAttribute("type", "text");
+            } else {
+                input.setAttribute("type", "password");
+            }
+        }
     }
 }
 </script>
@@ -60,9 +74,7 @@ input {
     padding: 12px 20px;
     margin: 8px 0;
     border: 3px solid #ccc;
-    border-left: 0;
-    border-right: 0;
-    border-top: 0 ;
+    border-radius: 20px;
     transition: 0.5s ease-in-out;
     outline: none;
 }
@@ -70,13 +82,13 @@ input {
 input:focus {
     width: 50%;
     border: 3px solid aqua;
-  
+
 }
 
 .form-body {
     border-radius: 20px;
-    background-color: gray;
-    margin: 15% auto;
+    /* background-color: gray; */
+    /* margin: 15% auto; */
     padding: 10px;
     display: grid;
     grid-template-columns: auto auto;
