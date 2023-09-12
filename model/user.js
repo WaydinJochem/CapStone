@@ -77,7 +77,7 @@ class Users {
                         if (cResult) {
                             res.json({
                                 msg: "Logged in",
-                                token,
+                                // token,
                                 result: result[0]
                             })
                         } else {
