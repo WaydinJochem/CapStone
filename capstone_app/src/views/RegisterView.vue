@@ -1,8 +1,8 @@
 <template>
-    <form class="modal-content"> <!-- Register Content Start -->
+    <form class="modal-content" @submit.prevent="AddUser"> <!-- Register Content Start -->
         <RegisterForm :newUser="newUser">
         </RegisterForm>
-        <button @click="AddUser()">Submit</button>
+        <button type="submit">Register</button>
     </form>
 </template>
 <script>
@@ -36,7 +36,7 @@ export default {
                 !this.newUser.Gender ||
                 !this.newUser.emailAdd ||
                 !this.newUser.userPwd) {
-                swal("Please fill out all required fields.");
+                alert("Please fill out all required fields.");
                 return; // Prevent form submission
             }
             else if (success) {
@@ -57,11 +57,21 @@ export default {
 } */
 
 
-
+button {
+    margin-top: 20px;
+    padding: 10px;
+    font-size:large;
+    border-radius: 10px;
+    box-shadow: inset -4px -4px  grey;
+}
+button:hover {
+    box-shadow: none;
+    cursor: pointer;
+}
 
 .modal-content {
     border-radius: 20px;
-    background-color:rgb(18, 101, 184);
+    background-color:aqua;
     margin: 15% auto;
     padding: 10px;
     /* border: 1px solid #888; */

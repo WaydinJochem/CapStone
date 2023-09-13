@@ -1,13 +1,13 @@
 <template>
   <div class="background">
-    <h1>Not Limited by the Universe but Afraid to Dream</h1>
+    <div class="entro">
+      <h1>Not Limited by the Universe but Afraid to Dream</h1>
+      <img src="https://i.postimg.cc/8PjY7s3j/download-removebg-preview.png" alt="">
+    </div>
     <div class="circle">
       <h2>ÙniSale</h2>
     </div>
-    <h1>Not Limited by the Universe but Afraid to Dream</h1>
-    <div class="circle">
-      <h2>ÙniSale</h2>
-    </div>
+    
   </div>
 </template>
 
@@ -16,6 +16,7 @@
 </script>
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Joti+One&display=swap');
+
 * {
   text-align: center;
 }
@@ -25,15 +26,22 @@ h1 {
   font-size: 38px;
   color: #F9FAFB;
   text-shadow: -3px -3px 5px black;
-  margin-top: 30dvb;
+  margin-top: 10dvb;
 
+}
+.entro {
+  display: flex;
+ flex-direction: row;
+ justify-content: center;
+ align-items: center;
+ margin: auto;
 }
 
 .circle {
-  background: linear-gradient(45deg, gray, black,  silver);
-  margin-left:23% ;
+  background: linear-gradient(45deg, gray, black, silver);
+  margin-left: 23%;
   margin-right: 25%;
-  border-radius:50%;
+  border-radius: 50%;
 }
 
 h2 {

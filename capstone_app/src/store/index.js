@@ -3,6 +3,7 @@ const render = 'https://capstone-88ut.onrender.com/';
 import axios from 'axios';
 import VueCookies from 'vue-cookies';
 import router from '@/router';
+
 // import { assertLiteral } from '@babel/types';
 // import { container } from 'webpack';
 VueCookies.config('1h')

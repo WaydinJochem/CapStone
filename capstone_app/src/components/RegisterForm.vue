@@ -2,7 +2,7 @@
     <div class="form-body">
         <div class="Category">
             <label class="floating-label">FirstName</label>
-            <input type="text" class="info-input" v-model="newUser.firstName" placeholder="Enter FirstName Here"/>
+            <input type="text" class="info-input" v-model="newUser.firstName" placeholder="Enter FirstName Here" />
         </div>
         <div class="Category">
             <label for="">LastName</label>
@@ -10,7 +10,7 @@
         </div>
         <div class="Category">
             <label for="">Age</label>
-            <input type="number" class="info-input" v-model="newUser.userAge" placeholder="Enter Age"/>
+            <input type="number" class="info-input" v-model="newUser.userAge" placeholder="Enter Age" />
         </div>
         <div class="Category">
             <label for="">Gender</label>
@@ -22,13 +22,14 @@
         </div>
         <div class="Category">
             <label for="">Email</label>
-            <input type="email" class="info-input" v-model="newUser.emailAdd" placeholder="example@gmail.com"/>
+            <input type="email" class="info-input" v-model="newUser.emailAdd" placeholder="example@gmail.com" />
         </div>
         <div class="Category">
             <label for="">Password</label>
             <div>
-                <input type="password" class="info-input" v-model="newUser.userPwd" id="password" placeholder="password"/><span
-                    style="font-size: x-large;" @click="checkPass()" id="eye">&#128065;</span>
+                <input type="password" class="info-input" v-model="newUser.userPwd" id="password"
+                    placeholder="password" /><span style="font-size: x-large;" @click="checkPass()"
+                    id="eye">&#128065;</span>
             </div>
         </div>
         <div class="Category">
@@ -58,8 +59,8 @@ export default {
                 input.style.color = "black"
             } else {
                 input.setAttribute("type", "password");
-                eye.style.color = "white"
-                input.style.color = "white"
+                eye.style.color = "gray"
+                input.style.color = "gray"
             }
         }
     }
@@ -70,6 +71,7 @@ export default {
 
 .form-body {
     color: white;
+    font-weight: bold;
     box-shadow: inset -12px 12px black;
     border-bottom: 2px black solid;
     border-left: 1px black solid;
@@ -82,30 +84,37 @@ export default {
     margin-top: 20px;
 }
 
+span {
+    margin-left: 5px;
+    color: black;
+}
 
+span:hover {
+    cursor: pointer;
+}
 
 
 input {
     font-family: 'Oswald', sans-serif;
-    color: aliceblue;
     width: 20%;
     padding: 12px 20px;
     margin: 8px 0;
-    background: rgba(0, 255, 255, 0.2);
+    background: white;
     border: 3px solid #ccc;
     border-radius: 10px;
     transition: 0.5s ease-in-out;
     outline: none;
     text-align: center;
+    color: grey;
 }
-input::placeholder{
-    color: black;
-}
+
+
+
 
 input:focus {
     width: 40%;
-    border: 3px solid aqua;
-
+    border: 4px solid black;
+    color: black;
 }
 
 .form-body {
