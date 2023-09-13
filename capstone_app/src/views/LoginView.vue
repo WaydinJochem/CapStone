@@ -34,21 +34,20 @@ export default {
     //     alert('Login failed. Please check your credentials.');
     //   }  
     // },
-    loginUser() {
-      const success = this.$store.dispatch('login', {
+    async loginUser() {
+      const success = await this.$store.dispatch('login', {
         email: this.email,
         password: this.password,
       });
 
       if (success) {
         alert('Login successfully');
-        this.$router.push('/')
+        // this.$router.push('/')
       }
-      else {
+      else if (!success)
         alert('unable to login')
-      }
-    },
-  }
+    }
+  },
 }
 </script>
 <style></style>

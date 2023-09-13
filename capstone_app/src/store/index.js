@@ -2,6 +2,7 @@ import { createStore } from 'vuex';
 const render = 'https://capstone-88ut.onrender.com/';
 import axios from 'axios';
 import VueCookies from 'vue-cookies';
+import router from '@/router';
 // import { assertLiteral } from '@babel/types';
 // import { container } from 'webpack';
 VueCookies.config('1h')
@@ -10,8 +11,8 @@ export default createStore({
     items: null,
     item: null,
     users: null,
-    user: null,
-    userData: VueCookies.get('userData') || null,
+    user: VueCookies.get('user') || null,
+    // userData: VueCookies.get('userData') || null,
     userToken: VueCookies.get('userToken') || null,
   },
   mutations: {
@@ -31,18 +32,16 @@ export default createStore({
     },
     setUser: (state, user) => {
       state.user = user;
+      VueCookies.set('user', JSON.stringify(user), '1h');
     },
     setToken: (state, token) => {
       state.userToken = token;
       VueCookies.set('userToken', token, '1h')
     },
-    setUserData(state, userData) {
-      state.userData = userData;
-      VueCookies.set('userData', JSON.stringify(userData), '1h');
-    },
     clearUserData(state) {
-      state.userData = null;
-      VueCookies.remove('userData');
+      state.user = null;
+      VueCookies.remove('user');
+      VueCookies.remove('userToken');
     },
     // users mutations end
 
@@ -106,7 +105,7 @@ export default createStore({
     //     alert('An error occurred during login.');
     //   }
     // },
-    
+
     // async register({ commit }, newUser) {
     //   try {
     //     const response = await axios.post(`${render}register`, newUser);
@@ -119,7 +118,7 @@ export default createStore({
     //       alert('Registration failed. Please check your input.');
     //     }
     //   } catch (err) {
-      //     console.error(err);
+    //     console.error(err);
     //     alert('An error occurred during registration.');
     //   }
     // },
@@ -246,19 +245,19 @@ export default createStore({
       }
       catch (err) {
         console.error(err);
-      } 
+      }
     },
     async login({ commit }, { email, password }) {
       try {
         const response = await axios.post(`${render}login`, { emailAdd: email, userPwd: password });
 
-        if (response.data.token) {
+        if (response.status === 200) {
           const token = response.data.token;
-          const userData = response.data.result;
+          const user = response.data.result;
 
           commit('setToken', token);
-          commit('setUserData', userData);
-
+          commit('setUser', user);
+          router.push({ name: 'home' });
           // Redirect to the dashboard or another page after successful login
         } else {
           alert('Login failed. Please check your credentials.');
@@ -268,14 +267,15 @@ export default createStore({
         alert('An error occurred during login.');
       }
     },
+
+
+
+
+
+
+
+    //Delete Users+
     
-    
-
-
-
-
-
-    //Delete Users
     async RemoveUser(context, userID) {
       try {
         const response = await axios.delete(`${render}users/${userID}`)
@@ -309,7 +309,16 @@ export default createStore({
       }
     },
     // Users actions end
-
+    async logout({ commit }) {
+      try {
+        // Clear user-related state and cookies
+        commit('clearUserData'); // This mutation clears user-related data
+        router.push({ name: 'login' }); // Redirect to the login page (adjust the route name as needed)
+      } catch (err) {
+        console.error(err);
+        alert('An error occurred during logout.');
+      }
+    },
 
     //Login creating cookie
     // async Login(context, )

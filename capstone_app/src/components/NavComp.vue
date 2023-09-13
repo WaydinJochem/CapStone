@@ -15,7 +15,8 @@
             <router-link to="/admin"><img src="https://i.postimg.cc/Y9jjPf8q/icons8-male-user-80.png" alt=""></router-link>
             <img src="https://i.postimg.cc/C5X4GwY4/icons8-letter-80.png" alt="">
             <router-link to="/register">Register</router-link>
-            <router-link to="/login">Login</router-link>
+            <router-link to="/login">Login</router-link> |
+            <button @click="logout()">LogOut</button>
         </div>
 
     </div>
@@ -32,6 +33,15 @@ export default {
         openSidebar() {
             document.getElementById("nav-items").style.display = "flex";
             document.getElementById("replacement").style.display = "block";
+        },
+        logout() {
+            const success = this.$store.dispatch('logout');
+            if(success) {
+                alert("successfully logged out")
+            }
+            else{
+                alert("unable to log out")
+            }
         }
     },
 }

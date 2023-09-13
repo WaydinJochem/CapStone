@@ -1,21 +1,20 @@
 <template>
-    <form class="form-body">
-
+    <div class="form-body">
         <div class="Category">
-            <label for="">FirstName</label>
-            <input type="text" class="info-input" v-model="newUser.firstName" />
+            <label class="floating-label">FirstName</label>
+            <input type="text" class="info-input" v-model="newUser.firstName" placeholder="Enter FirstName Here"/>
         </div>
         <div class="Category">
             <label for="">LastName</label>
-            <input type="text" class="info-input" v-model="newUser.lastName" />
+            <input type="text" class="info-input" v-model="newUser.lastName" placeholder="Enter LastName Here" />
         </div>
         <div class="Category">
             <label for="">Age</label>
-            <input type="number" class="info-input" v-model="newUser.userAge" />
+            <input type="number" class="info-input" v-model="newUser.userAge" placeholder="Enter Age"/>
         </div>
         <div class="Category">
             <label for="">Gender</label>
-            <input type="text" class="info-input" v-model="newUser.Gender" />
+            <input type="text" class="info-input" v-model="newUser.Gender" placeholder="Male/Female" />
         </div>
         <div class="Category">
             <label for="">Role</label>
@@ -23,12 +22,13 @@
         </div>
         <div class="Category">
             <label for="">Email</label>
-            <input type="email" class="info-input" v-model="newUser.emailAdd" placeholder="example@gmail.com" />
+            <input type="email" class="info-input" v-model="newUser.emailAdd" placeholder="example@gmail.com"/>
         </div>
         <div class="Category">
             <label for="">Password</label>
             <div>
-                <input type="password" class="info-input" v-model="newUser.userPwd" id="password"/><span style="font-size: x-large;" @click="checkPass()">&#128065;</span>
+                <input type="password" class="info-input" v-model="newUser.userPwd" id="password" placeholder="password"/><span
+                    style="font-size: x-large;" @click="checkPass()" id="eye">&#128065;</span>
             </div>
         </div>
         <div class="Category">
@@ -39,9 +39,7 @@
             <input type="hidden" class="info-input" v-model="newUser.userID"
                 placeholder="Will be provided upon successful sign up" />
         </div>
-
-    </form>
-
+    </div>
     <!-- Register Content End -->
 </template>
 <script>
@@ -52,35 +50,60 @@ export default {
     methods: {
         checkPass() {
             const input = document.getElementById("password");
+            const eye = document.getElementById("eye")
 
             if (input.getAttribute("type") === "password") {
                 input.setAttribute("type", "text");
+                eye.style.color = "black"
+                input.style.color = "black"
             } else {
                 input.setAttribute("type", "password");
+                eye.style.color = "white"
+                input.style.color = "white"
             }
         }
     }
 }
 </script>
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
+.form-body {
+    color: white;
+    box-shadow: inset -12px 12px black;
+    border-bottom: 2px black solid;
+    border-left: 1px black solid;
+}
+
 .Category {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 20px;
 }
 
+
+
+
 input {
+    font-family: 'Oswald', sans-serif;
+    color: aliceblue;
     width: 20%;
     padding: 12px 20px;
     margin: 8px 0;
+    background: rgba(0, 255, 255, 0.2);
     border: 3px solid #ccc;
-    border-radius: 20px;
+    border-radius: 10px;
     transition: 0.5s ease-in-out;
     outline: none;
+    text-align: center;
+}
+input::placeholder{
+    color: black;
 }
 
 input:focus {
-    width: 50%;
+    width: 40%;
     border: 3px solid aqua;
 
 }

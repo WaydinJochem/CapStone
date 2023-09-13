@@ -17,7 +17,7 @@ export default {
 <style>
 body {
   margin: 0;
-  background: linear-gradient(35deg,#000b1e , #002B79 45%, #000B1E);
+  background: linear-gradient(aqua, lime, yellowgreen);
   background-attachment: fixed;
   background-repeat:no-repeat ;
 }

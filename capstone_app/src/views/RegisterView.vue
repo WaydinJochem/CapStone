@@ -1,9 +1,9 @@
 <template>
-    <div class="modal-content"> <!-- Register Content Start -->
+    <form class="modal-content"> <!-- Register Content Start -->
         <RegisterForm :newUser="newUser">
         </RegisterForm>
         <button @click="AddUser()">Submit</button>
-    </div>
+    </form>
 </template>
 <script>
 import RegisterForm from '@/components/RegisterForm.vue';
@@ -30,7 +30,16 @@ export default {
     methods: {
         AddUser() {
             const success = this.$store.dispatch("Register", this.newUser);
-            if (success) {
+            if (!this.newUser.firstName ||
+                !this.newUser.lastName ||
+                !this.newUser.userAge ||
+                !this.newUser.Gender ||
+                !this.newUser.emailAdd ||
+                !this.newUser.userPwd) {
+                swal("Please fill out all required fields.");
+                return; // Prevent form submission
+            }
+            else if (success) {
                 alert("Success")
                 this.$router.push("/login")
             }
@@ -52,10 +61,10 @@ export default {
 
 .modal-content {
     border-radius: 20px;
-    background-color: #fefefe;
+    background-color:rgb(18, 101, 184);
     margin: 15% auto;
     padding: 10px;
-    border: 1px solid #888;
+    /* border: 1px solid #888; */
     width: 60%;
     /* height: 40%; */
 }
