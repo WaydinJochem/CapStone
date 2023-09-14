@@ -28,14 +28,49 @@
             <td>Display a single user</td>
           </tr>
           <tr>
+            <td>GET</td>
+            <td>/items</td>
+            <td>Display all products</td>
+          </tr>
+          <tr>
+            <td>GET</td>
+            <td>/items/:id</td>
+            <td>Display single product</td>
+          </tr>
+          <tr>
+            <td>GET</td>
+            <td>/users/:id/carts</td>
+            <td>Display Cart</td>
+          </tr>
+          <tr>
             <td>PUT</td>
             <td>/users/:id</td>
             <td>Update single user record</td>
           </tr>
           <tr>
+            <td>PUT</td>
+            <td>/users/:id/cart/:id</td>
+            <td>Update cart item</td>
+          </tr>
+          <tr>
+            <td>PUT</td>
+            <td>/items/:id</td>
+            <td>Update a single products</td>
+          </tr>
+          <tr>
             <td>PATCH</td>
             <td>/users/:id</td>
             <td>To modify a user's record.</td>
+          </tr>
+          <tr>
+            <td>PATCH</td>
+            <td>/items/:id</td>
+            <td>Update products</td>
+          </tr>
+          <tr>
+            <td>PATCH</td>
+            <td>/users/:id/cart/:id</td>
+            <td>To modify a cart item</td>
           </tr>
           <tr>
             <td>POST</td>
@@ -48,41 +83,36 @@
             <td>Create user token</td>
           </tr>
           <tr>
+            <td>POST</td>
+            <td>/user/:id/cart</td>
+            <td>Add to cart</td>
+          </tr>
+          <tr>
+            <td>POST</td>
+            <td>/items</td>
+            <td>Add product</td>
+          </tr>
+          <tr>
             <td>DELETE</td>
             <td>/users/:id</td>
             <td>To delete a single user.</td>
-          </tr>
-          <tr>
-            <td>GET</td>
-            <td>/items</td>
-            <td>Display all products</td>
-          </tr>
-          <tr>
-            <td>GET</td>
-            <td>/items/:id</td>
-            <td>Display single product</td>
-          </tr>
-          <tr>
-            <td>PUT</td>
-            <td>/items/:id</td>
-            <td>Update a single products</td>
-          </tr>
-          <tr>
-            <td>PATCH</td>
-            <td>/items/:id</td>
-            <td>Update products</td>
           </tr>
           <tr>
             <td>DELETE</td>
             <td>/items/:id</td>
             <td>Delete a product.</td>
           </tr>
-
           <tr>
-            <td>POST</td>
-            <td>/items</td>
-            <td>Add product</td>
+            <td>DELETE</td>
+            <td>/items/:id/cart/:id</td>
+            <td>Delete a product from cart</td>
           </tr>
+          <tr>
+            <td>DELETE</td>
+            <td>/items/:id/cart</td>
+            <td>Delete cart</td>
+          </tr>
+
         </tbody>
       </table>
     </div>

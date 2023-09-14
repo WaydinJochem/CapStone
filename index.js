@@ -29,7 +29,7 @@ app.use(
     routes
 );
 
-// app.use(errorHandling);
+app.use(errorHandling);
 
 
 routes.get('/', (req, res) => {
