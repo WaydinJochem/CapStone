@@ -36,7 +36,7 @@ class Users {
         const { emailAdd, userPwd } = req.body
         // query
         const query = `
-        SELECT userID, firstName, lastName, userAge, Gender, userRole, emailAdd, userPwd, userURL
+        SELECT emailAdd, userPwd
         FROM Users
         WHERE emailAdd = '${emailAdd}';
         `
@@ -59,15 +59,15 @@ class Users {
                                 emailAdd,
                                 userPwd
                             })
-                         console.log("Token generated", token);
+                         // console.log("Token generated", token);
                         // Verify the token
-                        const decodedToken = verifyToken(token);
+                        // const decodedToken = verifyToken(token);
 
-                        if (decodedToken) {
-                            console.log('Decoded Token:', decodedToken);
-                        } else {
-                            console.error('Token verification failed');
-                        }
+                        // if (decodedToken) {
+                        //     console.log('Decoded Token:', decodedToken);
+                        // } else {
+                        //     console.error('Token verification failed');
+                        // }
                         // // Save a token
                         // res.cookie("LegitUser",
                         //     token, {
@@ -96,12 +96,12 @@ class Users {
     async register(req, res) {
         const data = req.body;
 
-        if (!data.userPwd) {
-            return res.json({
-                status: res.statusCode,
-                msg: "Password is required"
-            })
-        }
+        // if (!data.userPwd) {
+        //     return res.json({
+        //         status: res.statusCode,
+        //         msg: "Password is required"
+        //     })
+        // }
         // Encrypt password
         data.userPwd = await hash(data.userPwd, 15)
         // Payload
@@ -118,13 +118,6 @@ class Users {
             [data],
             (err) => {
                 if (err) throw err
-                // Create token
-                let token = createToken(user)
-                res.cookie("LegitUser", token,
-                    {
-                        // maxAge: 3,
-                        httpOnly: true
-                    })
                 res.json({
                     status: res.statusCode,
                     msg: "You are now registered."
