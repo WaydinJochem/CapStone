@@ -8,11 +8,11 @@
     <form @submit.prevent="loginUser">
       <div class="Category">
         <label for="email">Email:</label>
-        <input type="email" id="email" v-model="email" />
+        <input type="email" id="email" v-model="payload.emailAdd" />
       </div>
       <div class="Category">
         <label for="password">Password:</label>
-        <input type="password" id="password" v-model="password" />
+        <input type="password" id="password" v-model="payload.userPwd" />
         <span style="font-size: x-large;" @click="checkPass()" id="eye">&#128065;</span>
       </div>
       <button type="submit">Login</button>
@@ -23,34 +23,15 @@
 export default {
   data() {
     return {
-      email: "",
-      password: "",
+      payload: {
+        emailAdd: "",
+        userPwd: ""
+      }
     }
   },
   methods: {
-    // loginUser() {
-    //   // Get the user data from the userData cookie
-    //   const userData = JSON.parse(VueCookies.get('userData'));
-
-    //   if (userData && userData.email === this.email && userData.password === this.password) {
-    //     alert('Login successful');
-    //     // You can also redirect the user to another page here
-    //   } else {
-    //     alert('Login failed. Please check your credentials.');
-    //   }  
-    // },
-    async loginUser() {
-      const success = await this.$store.dispatch('login', {
-        email: this.email,
-        password: this.password,
-      });
-
-      if (success) {
-        alert('Login successfully');
-        // this.$router.push('/')
-      }
-      else if (!success)
-        alert('unable to login')
+    loginUser() {
+      this.$store.dispatch('login', this.payload)
     },
     checkPass() {
       const input = document.getElementById("password");

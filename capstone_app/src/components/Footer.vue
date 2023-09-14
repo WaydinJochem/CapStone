@@ -44,6 +44,7 @@ export default {
 <style scoped>
 section {
     background-color: black;
+    margin-top: 20px;
 }
 
 .sub-menu {

@@ -3,6 +3,8 @@ const render = 'https://capstone-88ut.onrender.com/';
 import axios from 'axios';
 import VueCookies from 'vue-cookies';
 import router from '@/router';
+import authuser from '@/services/authuser';
+import sweetAlert from 'sweetalert'
 
 // import { assertLiteral } from '@babel/types';
 // import { container } from 'webpack';
@@ -12,9 +14,9 @@ export default createStore({
     items: null,
     item: null,
     users: null,
-    user: VueCookies.get('user') || null,
+    user: null,
     // userData: VueCookies.get('userData') || null,
-    userToken: VueCookies.get('userToken') || null,
+    userToken: null,
   },
   mutations: {
     setItems: (state, products) => {
@@ -33,17 +35,16 @@ export default createStore({
     },
     setUser: (state, user) => {
       state.user = user;
-      VueCookies.set('user', JSON.stringify(user), '1h');
     },
     setToken: (state, token) => {
       state.userToken = token;
-      VueCookies.set('userToken', token, '1h')
+      // VueCookies.set('userToken', JSON.stringify(token), '1h')
     },
     clearUserData(state) {
       state.user = null;
-      VueCookies.remove('user');
       VueCookies.remove('userToken');
     },
+
     // users mutations end
 
   },
@@ -248,26 +249,35 @@ export default createStore({
         console.error(err);
       }
     },
-    async login({ commit }, { email, password }) {
+    async login(context, payload) {
       try {
-        const response = await axios.post(`${render}login`, { emailAdd: email, userPwd: password });
+        const { msg, token, result } = (
+          await axios.post(`${render}login`, payload)
+        ).data;
+        if (result) {
+          context.commit("setUser", { result, msg });
+          VueCookies.set("patient", { msg, token, result });
+          authuser.applyToken(token);
 
-        if (response.status === 200) {
-          const token = response.data.token;
-          const user = response.data.result;
-
-          commit('setToken', token);
-          commit('setUser', user);
-          router.push({ name: 'home' });
-          // Redirect to the dashboard or another page after successful login
-        } else {
-          alert('Login failed. Please check your credentials.');
+            sweetAlert({
+              title: msg,
+              text: `Welcome back ${result?.firstName} ${result?.lastName}`,
+              icon: "success",
+              timer: 1000,
+            });
+            router.push({ name: "home" });
+          } else {
+            sweetAlert({
+              title: "Error",
+              text: msg,
+              icon: "error",
+              timer: 1000,
+            });
+          }
+        } catch (e) {
+          context.commit("setMsg", "An error has occured");
         }
-      } catch (err) {
-        console.error(err);
-        alert('An error occurred during login.');
-      }
-    },
+      },
 
 
 
@@ -276,52 +286,54 @@ export default createStore({
 
 
     //Delete Users+
-    
+
     async RemoveUser(context, userID) {
-      try {
-        const response = await axios.delete(`${render}users/${userID}`)
-        if (response) {
-          context.dispatch("fetchUsers")
-          context.commit("setUser", response.data)
+        try {
+          const response = await axios.delete(`${render}users/${userID}`)
+          if (response) {
+            context.dispatch("fetchUsers")
+            context.commit("setUser", response.data)
+          }
+          else {
+            alert("delete was unsuccessful")
+          }
         }
-        else {
-          alert("delete was unsuccessful")
+        catch (err) {
+          console.error(err);
         }
-      }
-      catch (err) {
-        console.error(err);
-      }
-    },
+      },
 
     // Update Users
     async updateUser(context, updatedItem) {
-      try {
-        const response = await axios.patch(`${render}users/${updatedItem.userID}`, updatedItem)
-        if (response) {
-          context.dispatch("fetchUsers")
-          context.commit("setUser", response.data)
+        try {
+          const response = await axios.patch(`${render}users/${updatedItem.userID}`, updatedItem)
+          if (response) {
+            context.dispatch("fetchUsers")
+            context.commit("setUser", response.data)
+          }
+          else {
+            alert("update unsuccessful")
+          }
         }
-        else {
-          alert("update unsuccessful")
+        catch (err) {
+          console.error(err)
         }
-      }
-      catch (err) {
-        console.error(err)
-      }
-    },
+      },
     // Users actions end
-    async logout({ commit }) {
-      try {
-        // Clear user-related state and cookies
-        commit('clearUserData'); // This mutation clears user-related data
-        router.push({ name: 'login' }); // Redirect to the login page (adjust the route name as needed)
-      } catch (err) {
-        console.error(err);
-        alert('An error occurred during logout.');
-      }
-    },
+    async logout(context) {
+        try {
+          // Clear user-related state and cookies
+          context.commit('setUser');
+          context.commit('clearUserData'); // This mutation clears user-related data
+          router.push({ name: 'login' });
+          location.reload() // Redirect to the login page (adjust the route name as needed)
+        } catch (err) {
+          console.error(err);
+          alert('An error occurred during logout.');
+        }
+      },
 
-    //Login creating cookie
-    // async Login(context, )
-  },
-})
+      //Login creating cookie
+      // async Login(context, )
+    },
+  })

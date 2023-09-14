@@ -7,6 +7,7 @@
 <script>
 import ProductTable from '@/components/AdminProducts.vue';
 import UsersTable from '@/components/UsersAdmin.vue';
+
 export default {
     
     components: {

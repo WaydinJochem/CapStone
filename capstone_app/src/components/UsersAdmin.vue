@@ -24,7 +24,7 @@
                 <td>{{ users.userPwd }}</td>
                 <td>{{ users.userURL }}</td>
                 <td>
-                    <button @click="removeUser(users.userID )">Delete</button>
+                    <button @click="removeUser(users.userID)">Delete</button>
                     <button @click="editModal(users.userID)">Edit</button>
                 </td>
             </tr>
@@ -33,22 +33,27 @@
             <div class="modal-content">
                 <span class="close" @click="closeModal()">&times;</span>
                 <div>
-                      <!-- Modal Content Start -->
+                    <!-- Modal Content Start -->
                     <EditUser :edit="selectedUser">
                         <button @click="edit()">Update User</button>
                     </EditUser>
-                      <!-- Modal Content End -->
+                    <!-- Modal Content End -->
                 </div>
             </div>
         </div>
     </div>
-    <div v-else>Loading users</div>
+    <div v-else>
+        <h4>Loading Users Table</h4>
+        <spinner />
+    </div>
 </template>
 <script>
 import EditUser from './EditUserModal.vue';
+import spinner from './spinner.vue';
 export default {
     components: {
-        EditUser
+        EditUser,
+        spinner
     },
     computed: {
         users() {
@@ -62,7 +67,7 @@ export default {
         return {
             modalVisible: false,
             selectedUser: null,
-           
+
         }
     },
     methods: {
@@ -74,7 +79,7 @@ export default {
         },
         removeUser(userID) {
             const success = this.$store.dispatch("RemoveUser", userID);
-            if(success) {
+            if (success) {
                 alert("user successfully deleted")
             }
             else {
@@ -86,7 +91,7 @@ export default {
             this.selectedUser = {
                 ...this.$store.state.users.find(
                     (users) => users.userID === userID
-                ),  
+                ),
             };
             this.modalVisible = true;
         },
