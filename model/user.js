@@ -42,66 +42,42 @@ class Users {
         `
         // console.log(emailAdd);
         db.query(query, async (err, result) => {
-            if (err) throw err
+            if (err) throw err;
             if (!result?.length) {
                 res.json({
                     status: res.statusCode,
                     msg: "You provided a wrong email."
                 })
-            } else {
-                await compare(userPwd,
-                    result[0].userPwd,
-                    (cErr, cResult) => {
-                        if (cErr) throw cErr
-                        // Create a token
-                        const token =
-                            createToken({
-                                emailAdd,
-                                userPwd
-                            })
-                         // console.log("Token generated", token);
-                        // Verify the token
-                        // const decodedToken = verifyToken(token);
-
-                        // if (decodedToken) {
-                        //     console.log('Decoded Token:', decodedToken);
-                        // } else {
-                        //     console.error('Token verification failed');
-                        // }
-                        // // Save a token
-                        // res.cookie("LegitUser",
-                        //     token, {
-                        //     maxAge: 3600000,
-                        //     httpOnly: true
-                        // })
-                        if (cResult) {
-                            res.json({
-                                msg: "Logged in",
-                                token,
-                                result: result[0]
-                            })
-                        } else {
-                            res.json({
-                                status: res.statusCode,
-                                msg:
-                                    "Invalid password or you have not registered"
-                            })
-                        }
-                    })
+            }
+            else {
+                await compare(userPwd, result[0].userPwd, (cErr, cResult) => {
+                    if (cErr) throw cErr;
+                    // Create a token
+                    const token = createToken({
+                        emailAdd,
+                        userPwd,
+                    });
+                    if (cResult) {
+                        res.json({
+                            msg: "Logged in",
+                            token,
+                            result: result[0]
+                        });
+                    } else {
+                        res.json({
+                            status: res.statusCode,
+                            msg:
+                                "Invalid password or you have not registered"
+                        })
+                    }
+                })
 
             }
-        })
-    }
+        });
+    };
 
     async register(req, res) {
         const data = req.body;
-
-        // if (!data.userPwd) {
-        //     return res.json({
-        //         status: res.statusCode,
-        //         msg: "Password is required"
-        //     })
-        // }
         // Encrypt password
         data.userPwd = await hash(data.userPwd, 15)
         // Payload
