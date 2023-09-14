@@ -8,14 +8,14 @@
         </div>
 
         <div id="nav-items">
-            <router-link to="/"><img src="https://i.postimg.cc/KvBqZhtF/icons8-home-80-2.png" alt=""></router-link>
+            <router-link to="/home"><img src="https://i.postimg.cc/KvBqZhtF/icons8-home-80-2.png" alt=""></router-link>
             <router-link to="/about"><img src="https://i.postimg.cc/rscTQNkt/icons8-info-80.png" alt=""></router-link>
             <router-link to="/products"><img src="https://i.postimg.cc/TPzfWXN0/icons8-shopping-bag-80.png"
                     alt=""></router-link>
             <router-link to="/admin"><img src="https://i.postimg.cc/Y9jjPf8q/icons8-male-user-80.png" alt=""></router-link>
             <img src="https://i.postimg.cc/C5X4GwY4/icons8-letter-80.png" alt="">
             <router-link to="/register">Register</router-link>
-            <router-link to="/login">Login</router-link> |
+            <!-- <router-link to="/login">Login</router-link> | -->
             <button @click="logout()">LogOut</button>
         </div>
 
@@ -70,7 +70,7 @@ export default {
 }
 
 img {
-    size: 80px;
+    size: 20%;
     text-align: start;
 }
 

@@ -41,7 +41,7 @@ export default {
             }
             else if (success) {
                 alert("Success")
-                this.$router.push("/login")
+                this.$router.push("/")
             }
             else {
                 alert("Unable to add user")

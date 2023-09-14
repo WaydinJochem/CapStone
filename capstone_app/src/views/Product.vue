@@ -1,19 +1,24 @@
 <template>
     <div v-if="product">
-        <div v-for="product in product" :key="product.prodID">
-            <img :src="product.prodUrl" :alt="product.prodName">
+        <div v-for="product in product" :key="product.prodID" style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+            <img :src="product.prodUrl" :alt="product.prodName" style="width: 200px;">
+            <p style="margin-left: 20%;">
+               <ul>
+                <li style="font-size: xx-large; font-weight: bold;">{{ product.prodName }}</li>
+                <li>{{ product.quantity }} items available</li>
+                <li>R{{ product.amount }}</li>
+                <li>{{ product.Category }}</li>
+               </ul>
+            </p>
         </div>
     </div>
     <div v-else>
-        <div class="loading">
-            <svg width="64px" height="48px">
-                <polyline points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24" id="back"></polyline>
-                <polyline points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24" id="front"></polyline>
-            </svg>
-        </div>
+           <h3>Issuing Product</h3>
+            <spinner/>
     </div>
 </template>
 <script>
+import spinner from '../components/spinner.vue';
 export default {
     props: ['id'],
     computed: {
@@ -24,6 +29,9 @@ export default {
     mounted() {
         this.$store.dispatch('fetchItem', this.id)
         // console.log(this.mounted)
+    }, 
+    components: {
+        spinner,
     }
 }
 </script>
@@ -40,6 +48,10 @@ export default {
     stroke: #ff4d5033;
 }
 
+ul {
+    list-style: none;
+    font-size: large;
+}
 .loading svg polyline#front {
     fill: none;
     margin-top: auto;
@@ -57,5 +69,8 @@ export default {
     to {
         stroke-dashoffset: 0;
     }
+}
+div {
+    margin-bottom: 200px;
 }
 </style>

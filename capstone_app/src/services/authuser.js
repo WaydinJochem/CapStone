@@ -7,7 +7,6 @@ function applyToken(token) {
         }
     }
 }
-
 export default {
     applyToken
 }

@@ -1,5 +1,6 @@
 <template>
     <div v-if="items">
+        <h2>Admin Table</h2>
         <table>
             <tr>
                 <th>Product ID</th>

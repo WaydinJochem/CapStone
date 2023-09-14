@@ -14,7 +14,7 @@
         </div>
         <div class="Category">
             <label for="">Gender</label>
-            <input type="text" class="info-input" v-model="newUser.Gender" placeholder="Male/Female" />
+            <input type="text" class="info-input" v-model="newUser.Gender" placeholder="Male/Female" id="gender"/>
         </div>
         <div class="Category">
             <label for="">Role</label>
@@ -108,7 +108,9 @@ input {
     color: grey;
 }
 
-
+#gender {
+    text-transform: capitalize;
+}
 
 
 input:focus {

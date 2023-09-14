@@ -33,7 +33,7 @@
                    <input type="password" class="info-input" v-model="edit.userPwd" />
                </div>
                <div class="input-details-row">
-                   <label for="">User</label>
+                   <label for="">Picture</label>
                    <input type="text" class="info-input" v-model="edit.userURL" />
                </div>
              

@@ -1,5 +1,6 @@
 <template >
     <div v-if="users">
+        <h2>User Table</h2>
         <table>
             <tr>
                 <th>User ID</th>

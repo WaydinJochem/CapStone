@@ -15,8 +15,8 @@ export default createStore({
     item: null,
     users: null,
     user: null,
+    msg: null,
     // userData: VueCookies.get('userData') || null,
-    userToken: null,
   },
   mutations: {
     setItems: (state, products) => {
@@ -36,95 +36,19 @@ export default createStore({
     setUser: (state, user) => {
       state.user = user;
     },
-    setToken: (state, token) => {
-      state.userToken = token;
-      // VueCookies.set('userToken', JSON.stringify(token), '1h')
-    },
     clearUserData(state) {
       state.user = null;
       VueCookies.remove('userToken');
     },
+    setMsg: (state, msg) => {
+      state.msg = msg;
+    }
 
     // users mutations end
 
   },
   actions: {
-    // async Register({ commit }, newUser) {
-    //   try {
-    //     const response = await axios.post(`${render}register`, newUser);
-
-    //     if (response.data && response.data.token) {
-    //       const token = response.data.token;
-
-    //       // Set the user token using the mutation
-    //       commit('setToken', token);
-    //     } else {
-    //       alert('Registration failed. Please check your input.');
-    //     }
-    //   } catch (err) {
-    //     console.error(err);
-    //   }
-    // },
-    // async register({ commit, dispatch }, newUser) {
-    //   try {
-    //     const response = await axios.post(`${render}register`, newUser);
-
-    //     if (response.status === 200) {
-    //       // Registration successful, you can choose to automatically log in the user here
-    //       // You can also redirect to the login page or perform other actions
-    //       alert('Registration successful');
-    //       dispatch('redirect', '/login'); // Redirect to the login page
-    //     } else {
-    //       alert('Registration failed. Please check your input.');
-    //     }
-    //   } catch (err) {
-    //     console.error(err);
-    //     alert('An error occurred during registration.');
-    //   }
-    // },
-
-    // redirect(context, path) {
-    //   this.$router.push(path); // Replace `this.$router` with your router instance
-    // },
-
-    // async login({ commit }, { email, password }) {
-    //   try {
-    //     const response = await axios.post(`${render}login`, { email, password });
-
-    //     if (response.data && response.data.token) {
-    //       const token = response.data.token;
-    //       const userData = response.data.userData;
-
-    //       commit('setToken', token);
-    //       commit('setUserData', userData);
-
-    //       // Redirect to the dashboard or another page after successful login
-    //     } else {
-    //       alert('Login failed. Please check your credentials.');
-    //     }
-    //   } catch (err) {
-    //     console.error(err);
-    //     alert('An error occurred during login.');
-    //   }
-    // },
-
-    // async register({ commit }, newUser) {
-    //   try {
-    //     const response = await axios.post(`${render}register`, newUser);
-
-    //     if (response.status === 200) {
-    //       // Registration successful, you can choose to automatically log in the user here
-    //       // You can also redirect to the login page or perform other actions
-    //       alert('Registration successful');
-    //     } else {
-    //       alert('Registration failed. Please check your input.');
-    //     }
-    //   } catch (err) {
-    //     console.error(err);
-    //     alert('An error occurred during registration.');
-    //   }
-    // },
-
+ 
 
 
     async fetchItems(context) {
@@ -256,9 +180,8 @@ export default createStore({
         ).data;
         if (result) {
           context.commit("setUser", { result, msg });
-          VueCookies.set("patient", { msg, token, result });
+          VueCookies.set("userToken", { msg, token, result });
           authuser.applyToken(token);
-
             sweetAlert({
               title: msg,
               text: `Welcome back ${result?.firstName} ${result?.lastName}`,
@@ -275,7 +198,7 @@ export default createStore({
             });
           }
         } catch (e) {
-          context.commit("setMsg", "An error has occured");
+          context.commit("setMsg", "An error has occurred");
         }
       },
 

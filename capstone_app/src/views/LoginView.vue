@@ -14,6 +14,11 @@
         <label for="password">Password:</label>
         <input type="password" id="password" v-model="payload.userPwd" />
         <span style="font-size: x-large;" @click="checkPass()" id="eye">&#128065;</span>
+        <div>
+          <router-link to="/register">
+            <h5>Don't Have an Account? Why Not make one</h5>
+          </router-link>
+        </div>
       </div>
       <button type="submit">Login</button>
     </form>
