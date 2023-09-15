@@ -40,6 +40,12 @@
                         </router-link>
                     </li>
                     <hr>
+                    <li class="nav-item ms-5">
+                        <router-link to="/cart" class="nav-item">
+                            <p>Cart</p>
+                        </router-link>
+                    </li>
+                    <hr>
                 </ul>
             </div>
         </div>
@@ -48,6 +54,7 @@
 
 <script>
 import sweetAlert from 'sweetalert'
+import router from '@/router';
 export default {
     data() {
         return {
@@ -87,6 +94,7 @@ nav {
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 1;
 }
 
 .bg-success {

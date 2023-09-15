@@ -5,10 +5,10 @@
         <div class="flip-card">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
-                    <img :src="item.prodUrl" alt="postimages offline" style="height:100%; width:300px; border-radius: 20px;">
+                    <img src="https://i.postimg.cc/HLvN1Kdr/icons8-space-80.png" alt="" class="back-img">
                 </div>
                 <div class="flip-card-back">
-                 <img src="https://i.postimg.cc/HLvN1Kdr/icons8-space-80.png" alt="" class="back-img">
+                    <img :src="item.prodUrl" alt="postimages offline" style="height:100%; width:300px; border-radius: 20px;">
                 </div>
             </div>
         </div>
@@ -60,13 +60,12 @@ export default {
 
 /* Style the front side (fallback if image is missing) */
 .flip-card-front {
-    background-color: #bbb;
+    background: radial-gradient(dodgerblue, grey);
     color: black;
 }
 
 /* Style the back side */
 .flip-card-back {
-    background: radial-gradient(dodgerblue, grey);
     transform: rotateY(180deg);
 }
 

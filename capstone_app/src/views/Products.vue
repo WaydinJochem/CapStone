@@ -1,21 +1,22 @@
 <template>
     <main>
         <h1>This is the Products Page</h1>
+        <div class="container" id="filer">
+            <order/>
+        </div>
         <div v-if="items" class="display">
             <Card v-for="item in items" :key="item.prodID" :item="item" />
         </div>
         <div v-else>
-            <div class="loading">
-                <svg width="64px" height="48px">
-                    <polyline points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24" id="back"></polyline>
-                    <polyline points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24" id="front"></polyline>
-                </svg>
-            </div>
+            <h3>Issuing Products</h3>
+            <spinner/>
         </div>
     </main>
 </template>
 <script>
 import Card from '@/components/ProductsCard.vue';
+import spinner from '@/components/spinner.vue';
+
 export default {
     computed: {
         items() {
@@ -27,7 +28,8 @@ export default {
     },
     // name: 'ProductsView',
     components: {
-        Card
+        Card,
+        spinner
     }
 }
 </script>

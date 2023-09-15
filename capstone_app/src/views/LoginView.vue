@@ -1,26 +1,31 @@
 <template>
-  <div class="form-body">
-    <div>
-      <h1>Login</h1>
-      <p>If you reached this page it means you've successfully registered you account</p>
-    </div>
-
-    <form @submit.prevent="loginUser">
-      <div class="Category">
+  <div>
+    <form @submit.prevent="loginUser" class="form-body container border rounded-5 py-3 shadow-lg mb-5">
+      <div>
+        <h1>Login</h1>
+        <p>If you reached this page it means you've successfully registered you account</p>
+      </div>
+      <div>
         <label for="email">Email:</label>
+      </div>
+      <div class="Category mb-3">
         <input type="email" id="email" v-model="payload.emailAdd" />
       </div>
-      <div class="Category">
+      <div>
         <label for="password">Password:</label>
+      </div>
+      <div class="Category mb-3">
         <input type="password" id="password" v-model="payload.userPwd" />
         <span style="font-size: x-large;" @click="checkPass()" id="eye">&#128065;</span>
-        <div>
-          <router-link to="/register">
-            <h5>Don't Have an Account? Why Not make one</h5>
-          </router-link>
-        </div>
       </div>
-      <button type="submit">Login</button>
+      <div class="py-auto">
+        <router-link to="/register">
+          <h5>Don't Have an Account? Why Not make one</h5>
+        </router-link>
+      </div>
+      <div style="margin-left: auto;">
+        <button type="submit">Login</button>
+      </div>
     </form>
   </div>
 </template>
@@ -56,21 +61,7 @@ export default {
 }
 </script>
 <style scoped>
-.form-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* justify-items: center; */
-  padding: 50px;
-  margin: auto;
-  width: 20%;
-  color: white;
-  background: aqua;
-  box-shadow: inset -12px 12px black;
-  border-radius: 10px;
-  border-bottom: 2px black solid;
-  border-left: 1px black solid;
-}
+/*  */
 
 button {
   margin-top: 20px;
@@ -113,10 +104,10 @@ input:focus {
   color: black;
 }
 
-.Category {
+/* .Category {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
-}
+} */
 </style>
