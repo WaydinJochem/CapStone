@@ -6,6 +6,7 @@
     </form>
 </template>
 <script>
+import sweetAlert from 'sweetalert'
 import RegisterForm from '@/components/RegisterForm.vue';
 export default {
     components: {
@@ -36,15 +37,15 @@ export default {
                 !this.newUser.Gender ||
                 !this.newUser.emailAdd ||
                 !this.newUser.userPwd) {
-                alert("Please fill out all required fields.");
+                    sweetAlert("Error", "Please Fill out a fields", "error")
                 return; // Prevent form submission
             }
             else if (success) {
-                alert("Success")
+                sweetAlert("Well Done", "User Successfully register", "error")
                 this.$router.push("/")
             }
             else {
-                alert("Unable to add user")
+               sweetAlert("Oops..", "Adding User Failed", "error")
             }
         }
     }

@@ -1,6 +1,5 @@
 <template>
-    
-     <div class="add-products-div">
+     <div class="add-products-div container">
         <div class="add-products-inner">
             <slot />
             <div class="input-details-div">

@@ -59,7 +59,7 @@ export default createStore({
           context.commit("setItems", results);
         }
         else {
-          alert('An error seems to have ocurred while trying to fetch products')
+          sweetAlert("Oops..", "Unable to fetch Products", "error")
         }
       }
       catch (err) {
@@ -74,7 +74,7 @@ export default createStore({
           context.commit("setItem", results);
         }
         else {
-          alert('Unable to retrieve product ID')
+          sweetAlert("Oops..", "Unable to fetch Product", "error")
         }
       }
       catch (err) {
@@ -89,7 +89,7 @@ export default createStore({
           context.commit("setItems", response.data);
         }
         else {
-          alert('Post was unsuccessful')
+          sweetAlert("Oops..", "Unable to add Product", "error")
         }
       }
       catch (err) {
@@ -104,7 +104,7 @@ export default createStore({
           context.commit("setItem", response.data)
         }
         else {
-          alert("delete was unsuccessful")
+          sweetAlert("Oops..", "Unable to Delete Product", "error")
         }
       }
       catch (err) {
@@ -119,7 +119,7 @@ export default createStore({
           context.commit("setItem", response.data)
         }
         else {
-          alert("update unsuccessful")
+          sweetAlert("Oops..", "Update Unsuccessful", "error")
         }
       }
       catch (err) {
@@ -136,7 +136,7 @@ export default createStore({
           context.commit("setUsers", results);
         }
         else {
-          alert('An error seems to have ocurred while trying to fetch users')
+          sweetAlert("Oops..", "Unable to fetch Users", "error")
         }
       }
       catch (err) {
@@ -151,7 +151,7 @@ export default createStore({
           context.commit("setUser", results);
         }
         else {
-          alert('Unable to retrieve user ID')
+          sweetAlert("Oops..", "Unable to fetch User ID", "error")
         }
       }
       catch (err) {
@@ -166,7 +166,7 @@ export default createStore({
           context.commit("setUsers", response.data);
         }
         else {
-          alert('Post was unsuccessful')
+          sweetAlert("Oops..", "Registration Unsuccessful", "error")
         }
       }
       catch (err) {
@@ -218,7 +218,7 @@ export default createStore({
             context.commit("setUser", response.data)
           }
           else {
-            alert("delete was unsuccessful")
+            sweetAlert("Oops..", "Unable to Remove User", "error")
           }
         }
         catch (err) {
@@ -235,7 +235,7 @@ export default createStore({
             context.commit("setUser", response.data)
           }
           else {
-            alert("update unsuccessful")
+            sweetAlert("Oops..", "Update Unsuccessful", "error")
           }
         }
         catch (err) {
@@ -252,7 +252,7 @@ export default createStore({
           location.reload() // Redirect to the login page (adjust the route name as needed)
         } catch (err) {
           console.error(err);
-          alert('An error occurred during logout.');
+          sweetAlert("Oops..", "Failed to logout", "error")
         }
       },
 

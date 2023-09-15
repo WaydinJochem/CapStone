@@ -80,15 +80,16 @@ const routes = [
           icon: "error",
           timer: 1000,
         });
-      } else if (user && user.role !== 'admin') {
-        // User is logged in but not an admin, redirect to an unauthorized page or show an error message
-        sweetAlert({
-          title: "Not Logged In",
-          text: "Access Denied. You are not an admin.",
-          icon: "error",
-          timer: 1000,
-        })
       }
+      // } else if (user && user.role !== 'admin') {
+      //   // User is logged in but not an admin, redirect to an unauthorized page or show an error message
+      //   sweetAlert({
+      //     title: "Not Logged In",
+      //     text: "Access Denied. You are not an admin.",
+      //     icon: "error",
+      //     timer: 1000,
+      //   })
+      // }
 
       else {
         next();

@@ -51,6 +51,7 @@
 <script>
 import EditUser from './EditUserModal.vue';
 import spinner from './spinner.vue';
+import sweetAlert from 'sweetalert'
 export default {
     components: {
         EditUser,
@@ -81,10 +82,10 @@ export default {
         removeUser(userID) {
             const success = this.$store.dispatch("RemoveUser", userID);
             if (success) {
-                alert("user successfully deleted")
+                sweetAlert("!!Gone!!", "Deleted", "success")
             }
             else {
-                alert("failed to delete user")
+                sweetAlert("Oops..", "Delete Failed", "error")
             }
         },
         async editModal(userID) {
@@ -102,7 +103,7 @@ export default {
                 this.closeModal();
             }
             else {
-                alert("error")
+                sweetAlert("Oops..", "Unable to edit", "error")
             }
         },
     }

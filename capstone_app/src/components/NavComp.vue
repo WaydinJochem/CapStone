@@ -47,7 +47,7 @@
 </template>
 
 <script>
-
+import sweetAlert from 'sweetalert'
 export default {
     data() {
         return {
@@ -72,10 +72,10 @@ export default {
         logout() {
             const success = this.$store.dispatch('logout');
             if (success) {
-                alert("successfully logged out")
+                sweetAlert("Well Done!", "User was successfully logged Out", "success")
             }
             else {
-                alert("unable to log out")
+                sweetAlert("Error!", "Unable to Logout", "error")
             }
         }
     },
@@ -88,19 +88,24 @@ nav {
     top: 0;
     width: 100%;
 }
+
 .bg-success {
-  --bs-bg-opacity: 1;
-  background: linear-gradient(purple, black);
+    --bs-bg-opacity: 1;
+    background: linear-gradient(purple, black);
 }
+
 ul img {
     background-color: aliceblue;
     border-radius: 50%;
     transition: 1s ease-in-out;
 }
+
 ul img:hover {
     background-color: #333;
     box-shadow: 2px -2px white;
     width: 70px;
 }
-
+.router-link-active {
+display: none;
+}
 </style>
