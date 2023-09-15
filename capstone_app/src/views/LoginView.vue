@@ -78,6 +78,7 @@ button {
   font-size: large;
   border-radius: 10px;
   box-shadow: inset -4px -4px grey;
+  cursor: pointer;
 }
 
 span {

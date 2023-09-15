@@ -96,8 +96,8 @@ export default {
         closeModal() {
             this.modalVisible = false
         },
-        async editModal(prodID) {
-            await this.$store.dispatch("fetchItems")
+        editModal(prodID) {
+             this.$store.dispatch("fetchItems")
             this.selectedItem = {
                 ...this.$store.state.items.find(
                     (product) => product.prodID === prodID

@@ -13,8 +13,8 @@ const routes = [
       if (!VueCookies.get("userToken")) {
         next('/');
         sweetAlert({
-          title: "Error",
-          text: "User Not Logged In",
+          title: "Not Logged In",
+          text: "Please Log In before Continuing",
           icon: "error",
           timer: 1000,
         });
@@ -35,8 +35,8 @@ const routes = [
       if (!VueCookies.get("userToken")) {
         next('/');
         sweetAlert({
-          title: "Error",
-          text: "User Not Logged In",
+          title: "Not Logged In",
+          text: "Please Log In before Continuing",
           icon: "error",
           timer: 1000,
         });
@@ -55,8 +55,8 @@ const routes = [
       if (!VueCookies.get("userToken")) {
         next('/');
         sweetAlert({
-          title: "Error",
-          text: "User Not Logged In",
+          title: "Not Logged In",
+          text: "Please Log In before Continuing",
           icon: "error",
           timer: 1000,
         });
@@ -75,15 +75,15 @@ const routes = [
       if (!VueCookies.get("userToken")) {
         next('/');
         sweetAlert({
-          title: "Error",
-          text: "User Not Logged In",
+          title: "Not Logged In",
+          text: "Please Log In before Continuing",
           icon: "error",
           timer: 1000,
         });
       } else if (user && user.role !== 'admin') {
         // User is logged in but not an admin, redirect to an unauthorized page or show an error message
         sweetAlert({
-          title: "Error",
+          title: "Not Logged In",
           text: "Access Denied. You are not an admin.",
           icon: "error",
           timer: 1000,
@@ -104,8 +104,8 @@ const routes = [
       if (!VueCookies.get("userToken")) {
         next('/');
         sweetAlert({
-          title: "Error",
-          text: "User Not Logged In",
+          title: "Not Logged In",
+          text: "Please Log In before Continuing",
           icon: "error",
           timer: 1000,
         });
@@ -124,6 +124,24 @@ const routes = [
     path: '/',
     name: 'login',
     component: () => import('../views/LoginView.vue')
+  },
+  {
+    path: '/contact',
+    name: 'contact',
+    component: () => import('../views/ContactView.vue'),
+    beforeEnter: (to, from, next) => {
+      if (!VueCookies.get("userToken")) {
+        next('/');
+        sweetAlert({
+          title: "Not Logged In",
+          text: "Please Log In before Continuing",
+          timer: 1000,
+        });
+      }
+      else {
+        next();
+      }
+    }
   }
 
 ]
