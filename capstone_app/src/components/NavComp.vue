@@ -105,7 +105,10 @@ ul img:hover {
     box-shadow: 2px -2px white;
     width: 70px;
 }
-.router-link-active {
-display: none;
+
+.router-link-active img {
+    background-color: #333;
+    box-shadow: 2px -2px white;
+    width: 70px;
 }
 </style>

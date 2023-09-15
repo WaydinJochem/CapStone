@@ -82,11 +82,12 @@ export default {
 
 form:hover {
     background: radial-gradient(black, grey);
+    color: #ddd;
 }
 
 input {
     width: 100px;
-    border: 2px #333 dotted;
+    border: 4px #333 dotted;
     text-align: center;
     transition: 0.5s ease-in-out;
     outline: none;

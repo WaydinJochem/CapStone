@@ -1,8 +1,6 @@
 <template>
     <router-link :to="{ name: 'Item', params: { id: item.prodID } }">
         <div class="card">
-
-
         </div>
         <div class="flip-card">
             <div class="flip-card-inner">

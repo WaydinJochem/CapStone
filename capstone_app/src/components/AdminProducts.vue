@@ -25,10 +25,10 @@
                 </td>
             </tr>
         </table>
-        <div class="modal" v-if="modalVisible">
-            <div class="modal-content">
+        <div id="modal" v-if="modalVisible">
+            <div id="modal-content">
                 <!-- Modal content goes here -->
-                <span class="close" @click="closeModal">&times;</span>
+                <span id="close" @click="closeModal">&times;</span>
                 <!-- Start of modal content -->
                 <div v-if="modalContentType === 'add'">
                     <Add :newItem="newItem">
@@ -174,7 +174,7 @@ button {
     border: none
 }
 
-.modal {
+#modal {
     position: fixed;
     z-index: 1;
     left: 0;
@@ -187,7 +187,7 @@ button {
 }
 
 
-.modal-content {
+#modal-content {
     border-radius: 20px;
     background-color: #fefefe;
     margin: 15% auto;
@@ -198,15 +198,15 @@ button {
 }
 
 
-.close {
+#close {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+#close:hover,
+#close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;

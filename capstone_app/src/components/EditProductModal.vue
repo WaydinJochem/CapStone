@@ -2,26 +2,26 @@
      <div class="add-products-div container">
         <div class="add-products-inner">
             <slot />
-            <div class="input-details-div">
-                <div class="input-details-row">
+            <div>
+                <div >
                     <label for="">Product Name</label>
-                    <input type="text" class="info-input" v-model="update.prodName" />
+                    <input type="text" v-model="update.prodName" />
                 </div>
-                <div class="input-details-row">
+                <div>
                     <label for="">Quantity</label>
-                    <input type="number" class="info-input" v-model="update.quantity" />
+                    <input type="number" v-model="update.quantity" />
                 </div>
-                <div class="input-details-row">
+                <div>
                     <label for="">Price</label>
-                    <input type="number" class="info-input" v-model="update.amount" />
+                    <input type="number" v-model="update.amount" />
                 </div>
-                <div class="input-details-row">
+                <div>
                     <label for="">Category</label>
-                    <input type="text" class="info-input" v-model="update.Category" />
+                    <input type="text"  v-model="update.Category" />
                 </div>
-                <div class="input-details-row">
+                <div>
                     <label for="">Image URL</label>
-                    <input type="text" class="info-input" v-model="update.prodUrl" />
+                    <input type="text" v-model="update.prodUrl" />
                 </div>
               
             </div>
